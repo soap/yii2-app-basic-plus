@@ -7,7 +7,7 @@ use yii\helpers\Html;
     <div class="left_col scroll-view">
 
         <div class="navbar nav_title" style="border: 0;">
-            <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>tSchools</span></a>
+            <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>appBasic+</span></a>
         </div>
         <div class="clearfix"></div>
 
@@ -38,6 +38,8 @@ use yii\helpers\Html;
                     [
                         "items" => [
                             ["label" => "Home", "url" => "/", "icon" => "home"],
+                            ['label' => "About", "url" => ["/site/about"], "icon" => "adn"],
+                            ["label" => "Contact", "url" => ["/site/contact"], "icon" => "phone"],
                             ["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
                             ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
                             [

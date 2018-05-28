@@ -2,814 +2,759 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'tSchools - Small Tutorial School Management';
+$this->title = 'Yii2 Basic Plus';
+\jp3cki\yii2\flot\FlotAsset::register($this);
+\jp3cki\yii2\flot\FlotTimeAsset::register($this);
+
+\app\assets\ICheckAsset::register($this);
+\soap\jqvmap\assets\jQvmapAsset::register($this);
+\soap\jqvmap\assets\jQvmapWorldAsset::register($this);
+
+$this->registerJsFile(\yii\helpers\Url::to('/js/jquery.vmap.sampledata.js'),
+    ['depends' => [\soap\jqvmap\assets\jQvmapWorldAsset::className()] ]);
+
 $script = <<< JS
-    jQuery.plot('#chart_plot_01', [ [[0, 0], [1, 1]] ], { yaxis: { max: 1 } });
+    var data = [
+        [gd(2012, 1, 1), 208557], [gd(2012, 1, 2), 125068], [gd(2012, 1, 3), 931208], [gd(2012, 1, 4), 450040], 
+        [gd(2012, 1, 5), 761180], [gd(2012, 1, 6), 744526], [gd(2012, 1, 7), 707095], [gd(2012, 1, 8), 601316],
+        [gd(2012, 1, 9), 187495], [gd(2012, 1, 10), 716189], [gd(2012, 1, 11), 587141], [gd(2012, 1, 12), 147266], 
+        [gd(2012, 1, 13), 574670], [gd(2012, 1, 14), 175881], [gd(2012, 1, 15), 272519], [gd(2012, 1, 16), 211131],
+        [gd(2012, 1, 17), 637015], [gd(2012, 1, 18), 794050], [gd(2012, 1, 19), 399010], [gd(2012, 1, 20), 799942], 
+        [gd(2012, 1, 21), 595768], [gd(2012, 1, 22), 717126], [gd(2012, 1, 23), 414923], [gd(2012, 1, 24), 462479],
+        [gd(2012, 1, 25), 674334], [gd(2012, 1, 26), 20312], [gd(2012, 1, 27), 675892], [gd(2012, 1, 28), 808655], 
+        [gd(2012, 1, 29), 194543], [gd(2012, 1, 30), 664716], [gd(2012, 1, 31), 980720]
+    ];
+     
+    function gd(year, month, day) {
+        return new Date(year, month - 1, day).getTime();
+    }
+    jQuery.plot('#chart_plot_01', [data], { 
+            xaxis: {
+                mode: "time",
+                timeformat: "%Y/%m/%d"
+            } 
+        }
+    );
+    
+    jQuery('#vmap').vectorMap(
+    {
+    map: 'world_en',
+    backgroundColor: '#a5bfdd',
+    borderColor: '#818181',
+    borderOpacity: 0.25,
+    borderWidth: 1,
+    color: '#f4f3f0',
+    enableZoom: true,
+    hoverColor: '#c9dfaf',
+    hoverOpacity: null,
+    normalizeFunction: 'linear',
+    scaleColors: ['#b6d6ff', '#005ace'],
+    selectedColor: '#c9dfaf',
+    selectedRegions: null,
+    showTooltip: true,
+    onRegionClick: function(element, code, region)
+    {
+        var message = 'You clicked "'
+            + region
+            + '" which has the code: '
+            + code.toUpperCase();
+
+        alert(message);
+    }
+});
 JS;
 
 $this->registerJs($script, \yii\web\View::POS_END);
-
 ?>
 <div class="site-index">
-
-    <!-- Info boxes -->
+    <!-- top tiles -->
     <div class="row tile_count">
-        <div class="col-md-3 col-sm-6 col-xs-12 tile_stats_count">
-            <div class="count_top">
-                <span class="count_top"><i class="fa fa-road"></i> CPU Traffic</span>
-                <div class="count">2.5GB</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>90%</i> From last Week</span>
-            </div>
-            <!-- /.count_top -->
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+            <div class="count">2500</div>
+            <span class="count_bottom"><i class="green">4% </i> From last Week</span>
         </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12 tile_stats_count">
-            <div class="count_top">
-                <span class="count_top"><i class="fa fa-google-plus"></i> Likes</span>
-                <div class="count">101</div>
-                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>10%</i> From last Week</span>
-                <!-- /.count_top -->
-            </div>
-            <!-- /.tile_stats_count -->
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
+            <div class="count">123.50</div>
+            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
         </div>
-        <!-- /.col -->
-
-        <!-- fix for small devices only -->
-        <div class="clearfix visible-sm-block"></div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12 tile_stats_count"">
-            <div class="count_top">
-                <span class="count_top"><i class="fa fa-shopping-cart"></i> Sales</span>
-                <div class="count">760</div>
-                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>1%</i> From last Week</span>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
+            <div class="count green">2,500</div>
+            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
         </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12 tile_stats_count"">
-            <div class="count_top>
-                <span class="count_top"><i class="fa fa-users"></i> New Members</span>
-                <div class="count">2,000</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>100%</i> From last Week</span>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
+            <div class="count">4,567</div>
+            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
         </div>
-        <!-- /.col -->
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
+            <div class="count">2,315</div>
+            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
+            <div class="count">7,325</div>
+            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        </div>
     </div>
-    <!-- /.row -->
+    <!-- /top tiles -->
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Monthly Recap Report</h3>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="dashboard_graph">
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-wrench"></i></button>
+                <div class="row x_title">
+                    <div class="col-md-6">
+                        <h3>Network Activities <small>Graph title sub-title</small></h3>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div id="chart_plot_01" class="demo-placeholder"></div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+                    <div class="x_title">
+                        <h2>Top Campaign Performance</h2>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-6">
+                        <div>
+                            <p>Facebook Campaign</p>
+                            <div class="">
+                                <div class="progress progress_sm" style="width: 76%;">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Twitter Campaign</p>
+                            <div class="">
+                                <div class="progress progress_sm" style="width: 76%;">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-6">
+                        <div>
+                            <p>Conventional Media</p>
+                            <div class="">
+                                <div class="progress progress_sm" style="width: 76%;">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Bill boards</p>
+                            <div class="">
+                                <div class="progress progress_sm" style="width: 76%;">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    <br />
+
+    <div class="row">
+
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                    <h2>App Versions</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
                             </ul>
-                        </div>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <p class="text-center">
-                                <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                            </p>
-
-                            <div class="chart">
-                                <!-- Sales Chart Canvas -->
-                                <canvas id="salesChart" style="height: 180px;"></canvas>
-                            </div>
-                            <!-- /.chart-responsive -->
+                <div class="x_content">
+                    <h4>App Usage across versions</h4>
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.2</span>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-md-4">
-                            <p class="text-center">
-                                <strong>Goal Completion</strong>
-                            </p>
-
-                            <div class="progress-group">
-                                <span class="progress-text">Add Products to Cart</span>
-                                <span class="progress-number"><b>160</b>/200</span>
-
-                                <div class="progress sm">
-                                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
+                                    <span class="sr-only">60% Complete</span>
                                 </div>
                             </div>
-                            <!-- /.progress-group -->
-                            <div class="progress-group">
-                                <span class="progress-text">Complete Purchase</span>
-                                <span class="progress-number"><b>310</b>/400</span>
-
-                                <div class="progress sm">
-                                    <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                                </div>
-                            </div>
-                            <!-- /.progress-group -->
-                            <div class="progress-group">
-                                <span class="progress-text">Visit Premium Page</span>
-                                <span class="progress-number"><b>480</b>/800</span>
-
-                                <div class="progress sm">
-                                    <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                </div>
-                            </div>
-                            <!-- /.progress-group -->
-                            <div class="progress-group">
-                                <span class="progress-text">Send Inquiries</span>
-                                <span class="progress-number"><b>250</b>/500</span>
-
-                                <div class="progress sm">
-                                    <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                                </div>
-                            </div>
-                            <!-- /.progress-group -->
                         </div>
-                        <!-- /.col -->
+                        <div class="w_right w_20">
+                            <span>123k</span>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <!-- /.row -->
-                </div>
-                <!-- ./box-body -->
-                <div class="box-footer">
-                    <div class="row">
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="description-block border-right">
-                                <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                                <h5 class="description-header">$35,210.43</h5>
-                                <span class="description-text">TOTAL REVENUE</span>
-                            </div>
-                            <!-- /.description-block -->
+
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.3</span>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="description-block border-right">
-                                <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                                <h5 class="description-header">$10,390.90</h5>
-                                <span class="description-text">TOTAL COST</span>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
                             </div>
-                            <!-- /.description-block -->
                         </div>
-                        <!-- /.col -->
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="description-block border-right">
-                                <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                                <h5 class="description-header">$24,813.53</h5>
-                                <span class="description-text">TOTAL PROFIT</span>
-                            </div>
-                            <!-- /.description-block -->
+                        <div class="w_right w_20">
+                            <span>53k</span>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-sm-3 col-xs-6">
-                            <div class="description-block">
-                                <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                                <h5 class="description-header">1200</h5>
-                                <span class="description-text">GOAL COMPLETIONS</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <!-- /.row -->
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.4</span>
+                        </div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w_right w_20">
+                            <span>23k</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.5</span>
+                        </div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w_right w_20">
+                            <span>3k</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.6</span>
+                        </div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w_right w_20">
+                            <span>1k</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
                 </div>
-                <!-- /.box-footer -->
             </div>
-            <!-- /.box -->
         </div>
-        <!-- /.col -->
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                    <h2>Device Usage</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="" style="width:100%">
+                        <tr>
+                            <th style="width:37%;">
+                                <p>Top 5</p>
+                            </th>
+                            <th>
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                    <p class="">Device</p>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                    <p class="">Progress</p>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                            </td>
+                            <td>
+                                <table class="tile_info">
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square blue"></i>IOS </p>
+                                        </td>
+                                        <td>30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square green"></i>Android </p>
+                                        </td>
+                                        <td>10%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square purple"></i>Blackberry </p>
+                                        </td>
+                                        <td>20%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square aero"></i>Symbian </p>
+                                        </td>
+                                        <td>15%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square red"></i>Others </p>
+                                        </td>
+                                        <td>30%</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                    <h2>Quick Settings</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+                        <ul class="quick-list">
+                            <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>
+                            </li>
+                            <li><i class="fa fa-bars"></i><a href="#">Subscription</a>
+                            </li>
+                            <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
+                            <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
+                            </li>
+                            <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
+                            <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
+                            </li>
+                            <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
+                            </li>
+                        </ul>
+
+                        <div class="sidebar-widget">
+                            <h4>Profile Completion</h4>
+                            <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height: 100px;"></canvas>
+                            <div class="goal-wrapper">
+                                <span id="gauge-text" class="gauge-value pull-left">0</span>
+                                <span class="gauge-value pull-left">%</span>
+                                <span id="goal-text" class="goal-value pull-right">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <!-- /.row -->
 
-    <!-- Main row -->
+
     <div class="row">
-        <!-- Left col -->
-        <div class="col-md-8">
-            <!-- MAP & BOX PANE -->
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Visitors Report</h3>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Recent Activities <small>Sessions</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        <ul class="list-unstyled timeline widget">
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                                        </div>
+                                        <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                                        </div>
+                                        <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                                        </div>
+                                        <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                                        </div>
+                                        <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                    <div class="row">
-                        <div class="col-md-9 col-sm-8">
-                            <div class="pad">
-                                <!-- Map will be created here -->
-                                <div id="world-map-markers" style="height: 325px;"></div>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-3 col-sm-4">
-                            <div class="pad box-pane-right bg-green" style="min-height: 280px">
-                                <div class="description-block margin-bottom">
-                                    <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                                    <h5 class="description-header">8390</h5>
-                                    <span class="description-text">Visits</span>
-                                </div>
-                                <!-- /.description-block -->
-                                <div class="description-block margin-bottom">
-                                    <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                                    <h5 class="description-header">30%</h5>
-                                    <span class="description-text">Referrals</span>
-                                </div>
-                                <!-- /.description-block -->
-                                <div class="description-block">
-                                    <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                                    <h5 class="description-header">70%</h5>
-                                    <span class="description-text">Organic</span>
-                                </div>
-                                <!-- /.description-block -->
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
+        </div>
+
+
+        <div class="col-md-8 col-sm-8 col-xs-12">
+
+
+
             <div class="row">
-                <div class="col-md-6">
-                    <!-- DIRECT CHAT -->
-                    <div class="box box-warning direct-chat direct-chat-warning">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Direct Chat</h3>
 
-                            <div class="box-tools pull-right">
-                                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                                    <i class="fa fa-comments"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                                </button>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Visitors location <small>geo-presentation</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="dashboard-widget-content">
+                                <div class="col-md-4 hidden-small">
+                                    <h2 class="line_30">125.7k Views from 60 countries</h2>
+
+                                    <table class="countries_list">
+                                        <tbody>
+                                        <tr>
+                                            <td>United States</td>
+                                            <td class="fs15 fw700 text-right">33%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>France</td>
+                                            <td class="fs15 fw700 text-right">27%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Germany</td>
+                                            <td class="fs15 fw700 text-right">16%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Spain</td>
+                                            <td class="fs15 fw700 text-right">11%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Britain</td>
+                                            <td class="fs15 fw700 text-right">10%</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>
                             </div>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <!-- Conversations are loaded here -->
-                            <div class="direct-chat-messages">
-                                <!-- Message. Default to the left -->
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-info clearfix">
-                                        <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                                        <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-info -->
-                                    <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">
-                                        Is this template really for free? That's unbelievable!
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
-                                <!-- /.direct-chat-msg -->
+                    </div>
+                </div>
 
-                                <!-- Message to the right -->
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-info clearfix">
-                                        <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                                        <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-info -->
-                                    <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">
-                                        You better believe it!
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
-                                <!-- /.direct-chat-msg -->
+            </div>
+            <div class="row">
 
-                                <!-- Message. Default to the left -->
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-info clearfix">
-                                        <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                                        <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-info -->
-                                    <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">
-                                        Working with AdminLTE on a great new app! Wanna join?
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
-                                <!-- /.direct-chat-msg -->
 
-                                <!-- Message to the right -->
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-info clearfix">
-                                        <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                                        <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
-                                    </div>
-                                    <!-- /.direct-chat-info -->
-                                    <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text">
-                                        I would love to.
-                                    </div>
-                                    <!-- /.direct-chat-text -->
-                                </div>
-                                <!-- /.direct-chat-msg -->
+                <!-- Start to do list -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>To Do List <small>Sample tasks</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
 
-                            </div>
-                            <!--/.direct-chat-messages-->
-
-                            <!-- Contacts are loaded here -->
-                            <div class="direct-chat-contacts">
-                                <ul class="contacts-list">
+                            <div class="">
+                                <ul class="to_do">
                                     <li>
-                                        <a href="#">
-                                            <img class="contacts-list-img" src="dist/img/user1-128x128.jpg" alt="User Image">
-
-                                            <div class="contacts-list-info">
-                                <span class="contacts-list-name">
-                                  Count Dracula
-                                  <small class="contacts-list-date pull-right">2/28/2015</small>
-                                </span>
-                                                <span class="contacts-list-msg">How have you been? I was...</span>
-                                            </div>
-                                            <!-- /.contacts-list-info -->
-                                        </a>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Schedule meeting with new client </p>
                                     </li>
-                                    <!-- End Contact Item -->
                                     <li>
-                                        <a href="#">
-                                            <img class="contacts-list-img" src="dist/img/user7-128x128.jpg" alt="User Image">
-
-                                            <div class="contacts-list-info">
-                                <span class="contacts-list-name">
-                                  Sarah Doe
-                                  <small class="contacts-list-date pull-right">2/23/2015</small>
-                                </span>
-                                                <span class="contacts-list-msg">I will be waiting for...</span>
-                                            </div>
-                                            <!-- /.contacts-list-info -->
-                                        </a>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Create email address for new intern</p>
                                     </li>
-                                    <!-- End Contact Item -->
                                     <li>
-                                        <a href="#">
-                                            <img class="contacts-list-img" src="dist/img/user3-128x128.jpg" alt="User Image">
-
-                                            <div class="contacts-list-info">
-                                <span class="contacts-list-name">
-                                  Nadia Jolie
-                                  <small class="contacts-list-date pull-right">2/20/2015</small>
-                                </span>
-                                                <span class="contacts-list-msg">I'll call you back at...</span>
-                                            </div>
-                                            <!-- /.contacts-list-info -->
-                                        </a>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Have IT fix the network printer</p>
                                     </li>
-                                    <!-- End Contact Item -->
                                     <li>
-                                        <a href="#">
-                                            <img class="contacts-list-img" src="dist/img/user5-128x128.jpg" alt="User Image">
-
-                                            <div class="contacts-list-info">
-                                <span class="contacts-list-name">
-                                  Nora S. Vans
-                                  <small class="contacts-list-date pull-right">2/10/2015</small>
-                                </span>
-                                                <span class="contacts-list-msg">Where is your new...</span>
-                                            </div>
-                                            <!-- /.contacts-list-info -->
-                                        </a>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Copy backups to offsite location</p>
                                     </li>
-                                    <!-- End Contact Item -->
                                     <li>
-                                        <a href="#">
-                                            <img class="contacts-list-img" src="dist/img/user6-128x128.jpg" alt="User Image">
-
-                                            <div class="contacts-list-info">
-                                <span class="contacts-list-name">
-                                  John K.
-                                  <small class="contacts-list-date pull-right">1/27/2015</small>
-                                </span>
-                                                <span class="contacts-list-msg">Can I take a look at...</span>
-                                            </div>
-                                            <!-- /.contacts-list-info -->
-                                        </a>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
                                     </li>
-                                    <!-- End Contact Item -->
                                     <li>
-                                        <a href="#">
-                                            <img class="contacts-list-img" src="dist/img/user8-128x128.jpg" alt="User Image">
-
-                                            <div class="contacts-list-info">
-                                <span class="contacts-list-name">
-                                  Kenneth M.
-                                  <small class="contacts-list-date pull-right">1/4/2015</small>
-                                </span>
-                                                <span class="contacts-list-msg">Never mind I found...</span>
-                                            </div>
-                                            <!-- /.contacts-list-info -->
-                                        </a>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
                                     </li>
-                                    <!-- End Contact Item -->
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Create email address for new intern</p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Have IT fix the network printer</p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Copy backups to offsite location</p>
+                                    </li>
                                 </ul>
-                                <!-- /.contatcts-list -->
                             </div>
-                            <!-- /.direct-chat-pane -->
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <form action="#" method="post">
-                                <div class="input-group">
-                                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                                    <span class="input-group-btn">
-                            <button type="button" class="btn btn-warning btn-flat">Send</button>
-                          </span>
+                    </div>
+                </div>
+                <!-- End to do list -->
+
+                <!-- start of weather widget -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Daily active users <small>Sessions</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="temperature"><b>Monday</b>, 07:30 AM
+                                        <span>F</span>
+                                        <span><b>C</b></span>
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
-                        <!-- /.box-footer-->
-                    </div>
-                    <!--/.direct-chat -->
-                </div>
-                <!-- /.col -->
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="weather-icon">
+                                        <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="weather-text">
+                                        <h2>Texas <br><i>Partly Cloudy Day</i></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="weather-text pull-right">
+                                    <h3 class="degrees">23</h3>
+                                </div>
+                            </div>
 
-                <div class="col-md-6">
-                    <!-- USERS LIST -->
-                    <div class="box box-danger">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Latest Members</h3>
+                            <div class="clearfix"></div>
 
-                            <div class="box-tools pull-right">
-                                <span class="label label-danger">8 New Members</span>
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                                </button>
+                            <div class="row weather-days">
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Mon</h2>
+                                        <h3 class="degrees">25</h3>
+                                        <canvas id="clear-day" width="32" height="32"></canvas>
+                                        <h5>15 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Tue</h2>
+                                        <h3 class="degrees">25</h3>
+                                        <canvas height="32" width="32" id="rain"></canvas>
+                                        <h5>12 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Wed</h2>
+                                        <h3 class="degrees">27</h3>
+                                        <canvas height="32" width="32" id="snow"></canvas>
+                                        <h5>14 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Thu</h2>
+                                        <h3 class="degrees">28</h3>
+                                        <canvas height="32" width="32" id="sleet"></canvas>
+                                        <h5>15 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Fri</h2>
+                                        <h3 class="degrees">28</h3>
+                                        <canvas height="32" width="32" id="wind"></canvas>
+                                        <h5>11 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Sat</h2>
+                                        <h3 class="degrees">26</h3>
+                                        <canvas height="32" width="32" id="cloudy"></canvas>
+                                        <h5>10 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body no-padding">
-                            <ul class="users-list clearfix">
-                                <li>
-                                    <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                                    <a class="users-list-name" href="#">Alexander Pierce</a>
-                                    <span class="users-list-date">Today</span>
-                                </li>
-                                <li>
-                                    <img src="dist/img/user8-128x128.jpg" alt="User Image">
-                                    <a class="users-list-name" href="#">Norman</a>
-                                    <span class="users-list-date">Yesterday</span>
-                                </li>
-                                <li>
-                                    <img src="dist/img/user7-128x128.jpg" alt="User Image">
-                                    <a class="users-list-name" href="#">Jane</a>
-                                    <span class="users-list-date">12 Jan</span>
-                                </li>
-                                <li>
-                                    <img src="dist/img/user6-128x128.jpg" alt="User Image">
-                                    <a class="users-list-name" href="#">John</a>
-                                    <span class="users-list-date">12 Jan</span>
-                                </li>
-                                <li>
-                                    <img src="dist/img/user2-160x160.jpg" alt="User Image">
-                                    <a class="users-list-name" href="#">Alexander</a>
-                                    <span class="users-list-date">13 Jan</span>
-                                </li>
-                                <li>
-                                    <img src="dist/img/user5-128x128.jpg" alt="User Image">
-                                    <a class="users-list-name" href="#">Sarah</a>
-                                    <span class="users-list-date">14 Jan</span>
-                                </li>
-                                <li>
-                                    <img src="dist/img/user4-128x128.jpg" alt="User Image">
-                                    <a class="users-list-name" href="#">Nora</a>
-                                    <span class="users-list-date">15 Jan</span>
-                                </li>
-                                <li>
-                                    <img src="dist/img/user3-128x128.jpg" alt="User Image">
-                                    <a class="users-list-name" href="#">Nadia</a>
-                                    <span class="users-list-date">15 Jan</span>
-                                </li>
-                            </ul>
-                            <!-- /.users-list -->
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer text-center">
-                            <a href="javascript:void(0)" class="uppercase">View All Users</a>
-                        </div>
-                        <!-- /.box-footer -->
                     </div>
-                    <!--/.box -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
 
-            <!-- TABLE: LATEST ORDERS -->
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Latest Orders</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="table-responsive">
-                        <table class="table no-margin">
-                            <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Item</th>
-                                <th>Status</th>
-                                <th>Popularity</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                <td>Call of Duty IV</td>
-                                <td><span class="label label-success">Shipped</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                <td>Samsung Smart TV</td>
-                                <td><span class="label label-warning">Pending</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                <td>iPhone 6 Plus</td>
-                                <td><span class="label label-danger">Delivered</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                <td>Samsung Smart TV</td>
-                                <td><span class="label label-info">Processing</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                <td>Samsung Smart TV</td>
-                                <td><span class="label label-warning">Pending</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                <td>iPhone 6 Plus</td>
-                                <td><span class="label label-danger">Delivered</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                <td>Call of Duty IV</td>
-                                <td><span class="label label-success">Shipped</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.table-responsive -->
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer clearfix">
-                    <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-                    <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
-                </div>
-                <!-- /.box-footer -->
+                <!-- end of weather widget -->
             </div>
-            <!-- /.box -->
         </div>
-        <!-- /.col -->
-
-        <div class="col-md-4">
-            <!-- Info Boxes Style 2 -->
-            <div class="info-box bg-yellow">
-                <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Inventory</span>
-                    <span class="info-box-number">5,200</span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 50%"></div>
-                    </div>
-                    <span class="progress-description">
-                    50% Increase in 30 Days
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box bg-green">
-                <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Mentions</span>
-                    <span class="info-box-number">92,050</span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 20%"></div>
-                    </div>
-                    <span class="progress-description">
-                    20% Increase in 30 Days
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box bg-red">
-                <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Downloads</span>
-                    <span class="info-box-number">114,381</span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
-                    </div>
-                    <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box bg-aqua">
-                <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Direct Messages</span>
-                    <span class="info-box-number">163,921</span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 40%"></div>
-                    </div>
-                    <span class="progress-description">
-                    40% Increase in 30 Days
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Browser Usage</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="chart-responsive">
-                                <canvas id="pieChart" height="150"></canvas>
-                            </div>
-                            <!-- ./chart-responsive -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-4">
-                            <ul class="chart-legend clearfix">
-                                <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                                <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                                <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                                <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                                <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                                <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                            </ul>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer no-padding">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="#">United States of America
-                                <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                        <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a>
-                        </li>
-                        <li><a href="#">China
-                                <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-                    </ul>
-                </div>
-                <!-- /.footer -->
-            </div>
-            <!-- /.box -->
-
-            <!-- PRODUCT LIST -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Recently Added Products</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <ul class="products-list product-list-in-box">
-                        <li class="item">
-                            <div class="product-img">
-                                <img src="dist/img/default-50x50.gif" alt="Product Image">
-                            </div>
-                            <div class="product-info">
-                                <a href="javascript:void(0)" class="product-title">Samsung TV
-                                    <span class="label label-warning pull-right">$1800</span></a>
-                                <span class="product-description">
-                          Samsung 32" 1080p 60Hz LED Smart HDTV.
-                        </span>
-                            </div>
-                        </li>
-                        <!-- /.item -->
-                        <li class="item">
-                            <div class="product-img">
-                                <img src="dist/img/default-50x50.gif" alt="Product Image">
-                            </div>
-                            <div class="product-info">
-                                <a href="javascript:void(0)" class="product-title">Bicycle
-                                    <span class="label label-info pull-right">$700</span></a>
-                                <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                            </div>
-                        </li>
-                        <!-- /.item -->
-                        <li class="item">
-                            <div class="product-img">
-                                <img src="dist/img/default-50x50.gif" alt="Product Image">
-                            </div>
-                            <div class="product-info">
-                                <a href="javascript:void(0)" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
-                                <span class="product-description">
-                          Xbox One Console Bundle with Halo Master Chief Collection.
-                        </span>
-                            </div>
-                        </li>
-                        <!-- /.item -->
-                        <li class="item">
-                            <div class="product-img">
-                                <img src="dist/img/default-50x50.gif" alt="Product Image">
-                            </div>
-                            <div class="product-info">
-                                <a href="javascript:void(0)" class="product-title">PlayStation 4
-                                    <span class="label label-success pull-right">$399</span></a>
-                                <span class="product-description">
-                          PlayStation 4 500GB Console (PS4)
-                        </span>
-                            </div>
-                        </li>
-                        <!-- /.item -->
-                    </ul>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer text-center">
-                    <a href="javascript:void(0)" class="uppercase">View All Products</a>
-                </div>
-                <!-- /.box-footer -->
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col -->
     </div>
 </div>
 

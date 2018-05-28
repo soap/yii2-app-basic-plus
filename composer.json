@@ -9,14 +9,17 @@
         "issues": "https://github.com/soap/yii2-app-basic-plus/issues?state=open",
         "source": "https://github.com/soap/yii2-app-bsaic-plus"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "dektrium/yii2-user": "^0.9.0@dev",
-        "yiister/yii2-gentelella": "~1.0"
+        "yiister/yii2-gentelella": "~1.0",
+        "hiqdev/yii2-asset-icheck": "1.0.2.5",
+        "jp3cki/yii2-flot": "*",
+        "soap/yii2-jqvmap-asset": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -1,21 +1,14 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
-    <br>
-</p>
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
+Yii 2 Basic Plus Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 rapidly creating small projects.
 
-The template contains the basic features including user login/logout and a contact page.
+The template contains the basic features including user login/logout using popular dektrium/user module and gentelella theme.
 It includes all commonly used configurations that would allow you to focus on adding new
 features to your application.
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
+[![Latest Stable Version](https://img.shields.io/packagist/v/soap/yii2-app-basic-plus.svg)](https://packagist.org/packages/soap/yii2-app-basic-plus)
+[![Total Downloads](https://img.shields.io/packagist/dt/soap/yii2-app-basic.svg)](https://packagist.org/packages/soap/yii2-app-basic-plus)
+[![Build Status](https://travis-ci.org/soap/yii2-app-basic-plus.svg?branch=master)](https://travis-ci.org/soap/yii2-app-basic-plus)
 
 DIRECTORY STRUCTURE
 -------------------
@@ -115,9 +108,9 @@ Edit the file `config/db.php` with real data, for example:
 ```php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'dsn' => 'mysql:host=localhost;dbname=yii2-basic-plus',
     'username' => 'root',
-    'password' => '1234',
+    'password' => '',
     'charset' => 'utf8',
 ];
 ```

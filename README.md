@@ -44,34 +44,26 @@ at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 You can then install this project template using the following command:
 
 ~~~
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
+php composer.phar create-project --prefer-dist --stability=dev soap/yii2-app-basic-plus myapp
 ~~~
 
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
+Now you should be able to access the application through the following URL, assuming `myapp` is the directory
 directly under the Web root.
 
 ~~~
-http://localhost/basic/web/
+http://localhost/myapp/web/
 ~~~
 
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
-
-You can then access the application through the following URL:
+Or if you want to quickly test, run local web server provided by Yii2:
 
 ~~~
-http://localhost/basic/web/
+yii serve
+~~~
+
+Then access your application using:
+
+~~~
+http://localhost:8080/myapp/
 ~~~
 
 

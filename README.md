@@ -46,6 +46,11 @@ You can then install this project template using the following command:
 ~~~
 php composer.phar create-project --prefer-dist --stability=dev soap/yii2-app-basic-plus myapp
 ~~~
+Or you may use this command for globally install composer:
+
+~~~
+composer create-project --prefer-dist --stability=dev soap/yii2-app-basic-plus myapp
+~~~
 
 Now you should be able to access the application through the following URL, assuming `myapp` is the directory
 directly under the Web root.

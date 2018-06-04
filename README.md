@@ -121,7 +121,9 @@ RUN MIGRATIONS
 --------------
 Run migration updates on database for dektrium/yii2-user as below:
 
+``
 yii migrate/up --migrationPath=@vendor/dektrium/yii2-user/migrations
+``
 
 TESTING
 -------

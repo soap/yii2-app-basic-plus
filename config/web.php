@@ -60,6 +60,13 @@ $config = [
             ],
         ],
         */
+        'formatter' => [
+            'class' => '\app\components\Formatter',
+            //uncomment following year to use ICU Buddhist calendar
+            //'locale' => 'th_TH@calendar=buddhist',
+            //uncomment following line to use Thai Buddhist year with ICU Buddhist calendar
+            //'calendar' => \IntlDateFormatter::TRADITIONAL
+        ],
     ],
     'modules' => [
         'user' => [

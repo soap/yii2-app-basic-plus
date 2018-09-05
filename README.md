@@ -46,6 +46,11 @@ You can then install this project template using the following command:
 ~~~
 php composer.phar create-project --prefer-dist --stability=dev soap/yii2-app-basic-plus myapp
 ~~~
+Or you may use this command for globally install composer:
+
+~~~
+composer create-project --prefer-dist --stability=dev soap/yii2-app-basic-plus myapp
+~~~
 
 Now you should be able to access the application through the following URL, assuming `myapp` is the directory
 directly under the Web root.
@@ -112,6 +117,13 @@ return [
 - Check and edit the other files in the `config/` directory to customize your application as required.
 - Refer to the README in the `tests` directory for information specific to basic application tests.
 
+RUN MIGRATIONS
+--------------
+Run migration updates on database for dektrium/yii2-user as below:
+
+``
+yii migrate/up --migrationPath=@vendor/dektrium/yii2-user/migrations
+``
 
 TESTING
 -------

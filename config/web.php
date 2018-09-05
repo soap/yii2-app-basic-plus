@@ -84,6 +84,18 @@ $config = [
                 'User' => 'app\models\User',
             ],
         ],
+        'notifications' => [
+            'class' => 'machour\yii2\notifications\NotificationsModule',
+            // Point this to your own Notification class
+            'notificationClass' => 'app\models\Notification',
+            // Allow to have notification with same (user_id, key, key_id)
+            // Default to FALSE
+            'allowDuplicate' => false,
+            // This callable should return your logged in user Id
+            'userId' => function() {
+                return \Yii::$app->user->id;
+            }
+        ],
     ],
     'params' => $params,
 ];

@@ -19,7 +19,8 @@
         "yiister/yii2-gentelella": "~1.0",
         "hiqdev/yii2-asset-icheck": "1.0.2.5",
         "jp3cki/yii2-flot": "*",
-        "soap/yii2-jqvmap-asset": "~1.0"
+        "soap/yii2-jqvmap-asset": "~1.0",
+        "loveorigami/yii2-notification-wrapper": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

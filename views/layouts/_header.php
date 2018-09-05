@@ -1,5 +1,22 @@
 <?php
 use yii\helpers\Html;
+use machour\yii2\notifications\widgets\NotificationsWidget;
+
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+NotificationsWidget::widget([
+    'theme' => NotificationsWidget::THEME_GROWL,
+    'clientOptions' => [
+        'location' => 'br',
+    ],
+    'counters' => [
+        '.notifications-header-count',
+        '.notifications-icon-count'
+    ],
+    'listSelector' => '#notifications',
+]);
+?>
 
 ?>
 <!-- top navigation -->
@@ -42,78 +59,27 @@ use yii\helpers\Html;
                         </li>
                     </ul>
                 </li>
-                <li role="presentation" class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
+                <!-- Notification Wrapper Menu start (added: 5/09/2561) -->
+                <li role="presentation" class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="badge bg-green label label-warning notifications-icon-count">0</span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        <li class="header">You have <span class="notifications-header-count">0</span> notifications</li>
                         <li>
-                            <a>
-                                <span class="image">
-                                    <img src="http://placehold.it/128x128" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
+                            <ul class="menu">
+                                <div id="notifications"></div>
+                            </ul>
                         </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="http://placehold.it/128x128" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="http://placehold.it/128x128" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span class="image">
-                                    <img src="http://placehold.it/128x128" alt="Profile Image" />
-                                </span>
-                                <span>
-                                    <span>John Smith</span>
-                                    <span class="time">3 mins ago</span>
-                                </span>
-                                <span class="message">
-                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                </span>
-                            </a>
-                        </li>
-                        <li>
+                        <li class="footer">
                             <div class="text-center">
-                                <a href="/">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
+                                <a href="#">View all</a> / <a href="#" id="notification-seen-all">Mark all as seen</a>
                             </div>
                         </li>
                     </ul>
                 </li>
+                <!-- Notification Wrapper Menu end (added: 5/09/2561) -->
             </ul>
         </nav>
     </div>
